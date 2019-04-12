@@ -116,9 +116,6 @@ export default {
     height: 70px;
     text-align: center;
   }
-  #logo{
-    margin-top: 10px;
-  }
   #music-type{
     color: #ccc;
     height: 50px;
@@ -127,9 +124,9 @@ export default {
   }
   #music-type>li{
     position: relative;
-    top: -19px;
+    top: -3px;
     padding:0 20px;
-    line-height: 70px;
+    line-height: 65px;
   }
   #music-type>li:hover{
     cursor: pointer;
@@ -143,8 +140,6 @@ export default {
     height: 30px;
     line-height: 30px;
     background: #fff;
-    position: relative;
-    top: -20px;
     padding-left: 5px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -170,6 +165,10 @@ export default {
     position: relative;
     top: -19px;
   }
+  .login{
+    position: relative;
+    top: 20px;
+  }
   .login-span:hover{
     color: #fff;
     cursor: pointer;
@@ -180,8 +179,6 @@ export default {
   }
   #header-head-img{
     border-radius: 20px;
-    position: relative;
-    top: 10px;
   }
   .header-selected{
     background: #000;
