@@ -3,14 +3,14 @@
   <div class="search-container">
     <div class="search-bar">
       <div class="search-input-father">
-        <input type="text" id="search-text" style="width: 90%" placeholder="歌手名/专辑名">
+        <input type="text" id="search-text" style="width: 90%" placeholder="歌曲名/歌手名/专辑名" v-model="searchText" @keydown.13="search">
       </div>
-      <div class="search-button">
+      <div class="search-button" @click="search">
         <i class="fas fa-search"></i>
       </div>
     </div>
-    <div class="search-result">
-      <div class="search-result-header">
+    <div class="search-result" :style="searchResultDispaly">
+      <div class="search-result-header" >
         <div :class="headerSelected === 'song'? 'search-result-header-son selected' : 'search-result-header-son'" @click="changeHeaderSelected('song')">
           单曲
         </div>
@@ -21,12 +21,13 @@
           专辑
         </div>
       </div>
-      <div class="search-result-body container">
-        <div class="a-search row" v-for="(item,key) in searchResult" v-bind:key="key">
-          <div class="col-md-4">
-            <i class="far fa-play-circle" style="font-size: 16px; color: #ccc;"></i> <span @click="changeMusic(item.src)">{{item.name}}</span>
-          </div>
-          <div class="col-md-2">
+      <div class="search-result-body container" >
+        <div v-if="searchResult.length > 0">
+          <div class="a-search row"  v-for="(item,key) in searchResult" v-bind:key="key" >
+            <div class="col-md-4">
+              <i class="far fa-play-circle" style="font-size: 16px; color: #ccc;"></i> <span @click="changeMusic(item.src)">{{item['song_name']}}</span>
+            </div>
+            <div class="col-md-2">
               <div class="row">
                 <div class="col-md-4 handle">
                   <i class="fas fa-plus" title="添加到播放列表"></i>
@@ -34,20 +35,25 @@
                 <div class="col-md-4 handle">
                   <i class="fas fa-plus-square" title="收藏"></i>
                 </div>
-                <div class="col-md-4 handle">
-                  <i class="fas fa-download" title="下载"></i>
+                <div class="col-md-4 handle" @click="download(item.src)">
+                  <i class="fas fa-download" title="下载" ></i>
                 </div>
               </div>
+            </div>
+            <div class="col-md-2">
+              {{item.singer}}
+            </div>
+            <div class="col-md-2">
+              《{{item.album}}》
+            </div>
+            <div class="col-md-2">
+              {{item.time}}
+            </div>
           </div>
-          <div class="col-md-2">
-            {{item.singer}}
-          </div>
-          <div class="col-md-2">
-            《{{item.album}}》
-          </div>
-          <div class="col-md-2">
-            {{item.time}}
-          </div>
+
+        </div>
+        <div v-else style="text-align: center; margin-top: 60px;font-size: 20px;">
+          未找到您搜索的歌曲
         </div>
       </div>
     </div>
@@ -63,15 +69,10 @@ export default {
     return {
       headerSelected: 'song',
       src: '',
-      searchResult: [
-      //   {
-      //   name: '平凡之路',
-      //   singer: '朴树',
-      //   album: '猎户星座',
-      //   time: '04:02',
-      //   src: '/static/music/aaa.flac'
-      // }
-      ]
+      searchResult: [],
+      path: '/static/music/',
+      searchText: '',
+      searchResultDispaly: {display: 'none'}
     }
   },
   methods: {
@@ -92,18 +93,30 @@ export default {
           audio.play()
         }
       }
+    },
+    search: function () {
+      let self = this
+      this.searchResultDispaly.display = 'block';
+      this.$http.get('http://localhost:3000/search?name=' + self.searchText)
+        .then(function (res) {
+          if (res.data.status === 0){
+            self.searchResult = []
+            for (let i in res.data.data) {
+              res.data.data[i].src = self.path + res.data.data[i].src
+            }
+            self.searchResult = res.data.data
+            self.changeHeaderSelected(res.data.type)
+          }
+        })
+        .catch(function (err) {
+          console.log('网络错误：'+ err);
+        })
+    },
+    download: function (url) {
+      window.open(url,"_blank");
     }
   },
   mounted: function () {
-    let self = this
-    this.$http.get('http://localhost:3000/search?name=平凡之路')
-      .then(function (res) {
-        self.searchResult = []
-        self.searchResult.push(res.data)
-      })
-      .catch(function (err) {
-        console.log('网络错误：'+ err);
-      })
   }
 }
 </script>
