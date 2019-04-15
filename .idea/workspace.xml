@@ -3,62 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="779b305e-3a0b-4171-8546-b65e66770fff" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/music/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/src/components/search.vue" beforeDir="false" afterPath="$PROJECT_DIR$/music/src/components/search.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/music/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music/src/components/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/music/src/components/login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/music/src/pages/index/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/music/src/pages/index/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/static/music/aaa.flac" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/node/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/accepts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/accepts/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/array-flatten/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/array-flatten/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/body-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/body-parser/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/bytes/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/bytes/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/content-disposition/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/content-disposition/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/content-type/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/content-type/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/cookie-signature/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/cookie-signature/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/cookie/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/cookie/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/debug/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/debug/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/depd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/depd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/destroy/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/destroy/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/ee-first/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/ee-first/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/encodeurl/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/encodeurl/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/escape-html/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/escape-html/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/etag/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/etag/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/express/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/express/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/finalhandler/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/finalhandler/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/forwarded/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/forwarded/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/fresh/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/fresh/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/http-errors/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/http-errors/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/iconv-lite/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/iconv-lite/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/inherits/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/inherits/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/ipaddr.js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/ipaddr.js/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/media-typer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/media-typer/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/merge-descriptors/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/merge-descriptors/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/methods/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/methods/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/mime-db/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/mime-db/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/mime-types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/mime-types/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/mime/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/mime/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/ms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/ms/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/negotiator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/negotiator/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/on-finished/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/on-finished/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/parseurl/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/parseurl/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/path-to-regexp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/path-to-regexp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/proxy-addr/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/proxy-addr/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/qs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/qs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/range-parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/range-parser/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/raw-body/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/raw-body/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/safe-buffer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/safe-buffer/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/safer-buffer/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/safer-buffer/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/send/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/send/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/serve-static/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/serve-static/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/setprototypeof/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/setprototypeof/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/statuses/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/statuses/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/type-is/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/type-is/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/unpipe/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/unpipe/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/utils-merge/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/utils-merge/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/node_modules/vary/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/node_modules/vary/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node/upload/DSC_5429.JPG" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -72,55 +20,66 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/music/src/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-              <folding>
-                <element signature="e#140#161#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-524">
-              <caret line="165" column="34" selection-start-line="165" selection-start-column="34" selection-end-line="165" selection-end-column="34" />
+            <state relative-caret-position="248">
+              <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
               <folding>
                 <element signature="e#1146#2746#0" />
                 <element signature="e#2791#3231#0" />
                 <element signature="e#3257#3337#0" />
+                <element signature="e#3381#5068#0" />
+                <element signature="n#!!block;n#insertIntoUser#0" />
+                <element signature="n#!!block;n#insertIntoUser#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../compressimg/index.html">
+      <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/music/src/pages/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-270">
-              <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reg.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/music/src/components/reg.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+            <state relative-caret-position="1581">
+              <caret line="101" column="36" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="36" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#span#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#div#3;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#div#5;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#2;n#div#6;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#5255#7115#0" />
+                <element signature="e#1819#1864#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/music/src/components/login.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="131" column="31" lean-forward="true" selection-start-line="131" selection-start-column="31" selection-end-line="131" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#video#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../face/pismap/pismap/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2933">
+              <caret line="67" column="46" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+              <folding>
+                <element signature="n#style#0;n#video#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mine.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/music/src/components/mine.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="7" column="1" selection-start-line="5" selection-end-line="7" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -151,6 +110,8 @@
       <find>localhost</find>
       <find>body</find>
       <find>con</find>
+      <find>src</find>
+      <find>canvas</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,16 +124,17 @@
         <option value="$PROJECT_DIR$/music/src/App.vue" />
         <option value="$PROJECT_DIR$/music/src/pages/login/login.vue" />
         <option value="$PROJECT_DIR$/music/src/components/mine.vue" />
-        <option value="$PROJECT_DIR$/music/src/components/login.vue" />
         <option value="$PROJECT_DIR$/music/index.html" />
         <option value="$PROJECT_DIR$/node/package.json" />
-        <option value="$PROJECT_DIR$/music/src/pages/index/index.vue" />
         <option value="$PROJECT_DIR$/music/src/components/search.vue" />
         <option value="$PROJECT_DIR$/music/src/main.js" />
         <option value="$PROJECT_DIR$/../compressimg/index.html" />
         <option value="$PROJECT_DIR$/1.txt" />
         <option value="$PROJECT_DIR$/music/src/components/reg.vue" />
+        <option value="$PROJECT_DIR$/music/src/pages/index/index.vue" />
+        <option value="$PROJECT_DIR$/../face/pismap/pismap/templates/login.html" />
         <option value="$PROJECT_DIR$/node/index.js" />
+        <option value="$PROJECT_DIR$/music/src/components/login.vue" />
       </list>
     </option>
   </component>
@@ -222,11 +184,10 @@
       <path value="$PROJECT_DIR$/node_modules/xtend/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="707" />
-    <option name="y" value="40" />
-    <option name="width" value="980" />
-    <option name="height" value="1040" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -259,6 +220,21 @@
               <item name="music" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="music" type="b2602c69:ProjectViewProjectNode" />
+              <item name="music" type="462c0819:PsiDirectoryNode" />
+              <item name="music" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="music" type="b2602c69:ProjectViewProjectNode" />
+              <item name="music" type="462c0819:PsiDirectoryNode" />
+              <item name="music" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -315,7 +291,7 @@
       <workItem from="1555120650458" duration="14141000" />
       <workItem from="1555206869548" duration="5728000" />
       <workItem from="1555223483290" duration="13733000" />
-      <workItem from="1555293852880" duration="16519000" />
+      <workItem from="1555293852880" duration="33203000" />
     </task>
     <task id="LOCAL-00001" summary="主页框架完成">
       <created>1555037678374</created>
@@ -328,18 +304,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80734000" />
+    <option name="totallyTimeSpent" value="97418000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-6" y="0" width="781" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24900925" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24832214" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32952926" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33333334" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32952926" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -352,6 +328,25 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24900925" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32952926" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39942938" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32952926" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -369,13 +364,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/music/src/components/mine.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" column="1" selection-start-line="5" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/music/src/pages/login/login.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -408,6 +396,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -457,6 +448,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -506,6 +500,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -555,6 +552,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -626,48 +626,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/music/src/components/mine.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="7" column="1" selection-start-line="5" selection-end-line="7" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/music/src/pages/index/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2880">
-          <caret line="98" column="36" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/music/src/components/login.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/music/src/components/search.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="101" column="37" lean-forward="true" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
           <folding>
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/music/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-          <folding>
-            <element signature="e#140#161#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -676,13 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="4752" column="4" selection-start-line="4752" selection-start-column="4" selection-end-line="4752" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node/youtu/nodejs_sdk-master/sample/sample.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -703,16 +656,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../compressimg/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/music/src/components/reg.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
+        <state relative-caret-position="-2940">
           <caret line="149" column="13" lean-forward="true" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -726,14 +672,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/music/src/components/search.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3450">
+          <caret line="101" column="37" lean-forward="true" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../compressimg/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1244">
+          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+          <folding>
+            <element signature="e#140#161#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node/youtu/nodejs_sdk-master/sample/sample.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/src/pages/index/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="101" column="36" selection-start-line="101" selection-start-column="29" selection-end-line="101" selection-end-column="36" />
+          <folding>
+            <element signature="e#1819#1864#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/src/components/mine.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="1" selection-start-line="5" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../face/pismap/pismap/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2933">
+          <caret line="67" column="46" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#video#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/node/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-524">
-          <caret line="165" column="34" selection-start-line="165" selection-start-column="34" selection-end-line="165" selection-end-column="34" />
+        <state relative-caret-position="248">
+          <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
           <folding>
             <element signature="e#1146#2746#0" />
             <element signature="e#2791#3231#0" />
             <element signature="e#3257#3337#0" />
+            <element signature="e#3381#5068#0" />
+            <element signature="n#!!block;n#insertIntoUser#0" />
+            <element signature="n#!!block;n#insertIntoUser#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/src/components/login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="131" column="31" lean-forward="true" selection-start-line="131" selection-start-column="31" selection-end-line="131" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#video#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

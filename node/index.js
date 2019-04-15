@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const multer = require('multer')
+const bodyParser = require('body-parser')
 const fs = require('fs')
 const path = require('path')
 
@@ -18,6 +19,8 @@ let mysql_user = 'root';
 let mysql_pass = 'root';
 
 let app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '5mb'}));
 let pool = mysql.createPool({
     user: mysql_user,
     password: mysql_pass
@@ -128,6 +131,43 @@ app.post('/reg', multer({
         }
     })
 });
+
+app.post('/faceLogin', (req, res) => {
+    // console.log(req.body.url);
+    let bitmap1 = Buffer.from(req.body.url, 'base64');//解码图片
+    fs.writeFileSync('tmp/verify.jpg',bitmap1);
+    youtu.facecompare('../music/static/upload/1555310082788.jpeg', 'tmp/verify.jpg', (data) => {
+        console.log(data);
+        if (data.httpcode === 200) {
+            if(data.data.errorcode === -1101){
+                res.send({
+                    status: 1,
+                    msg: '未发现人脸'
+                })
+            } else if (data.data.errorcode !== 0) {
+                res.send({
+                    status: 1,
+                    msg: '未知错误，错误码：' + data.data.errorcode
+                })
+            }else if (data.data.similarity > 80) {
+                res.send({
+                    status: 0,
+                    msg: '验证通过'
+                })
+            } else {
+                res.send({
+                    status: 1,
+                    msg: '验证未通过'
+                })
+            }
+        } else {
+            res.send({
+                status: 1,
+                msg: '第三方出错，请重试'
+            })
+        }
+    })
+})
 
 function saveAndVerify(req, res){
     let uname = req.body.uname;

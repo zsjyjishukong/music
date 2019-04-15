@@ -27,6 +27,7 @@
   <search v-if="headerSelected === 'find'"></search>
   <mine v-if="headerSelected === 'find'"></mine>
   <reg v-if="headerSelected === 'reg'"></reg>
+  <login v-if="headerSelected === 'login'"></login>
   <footer>
     <div id="footer-container">
       <ul>
@@ -57,9 +58,11 @@
 import Search from "../../components/search";
 import Mine from "../../components/mine";
 import Reg from '../../components/reg'
+import Login from '../../components/login'
+
 export default {
   name: 'index',
-  components: {Search, Mine, Reg},
+  components: {Search, Mine, Reg, Login},
   data() {
     return {
       isLogin: false,
@@ -68,7 +71,7 @@ export default {
   },
   methods: {
     login: function () {
-      this.isLogin = true
+      this.headerSelected = 'login'
     },
     reg:function () {
       this.headerSelected = 'reg'
