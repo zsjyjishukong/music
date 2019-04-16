@@ -3,7 +3,6 @@ const mysql = require('mysql');
 const multer = require('multer')
 const bodyParser = require('body-parser')
 const fs = require('fs')
-const path = require('path')
 
 const tencentyoutuyun = require('tencentyoutuyun')
 const conf  = tencentyoutuyun.conf;
@@ -133,43 +132,35 @@ app.post('/reg', multer({
 });
 
 app.post('/faceLogin', (req, res) => {
-    // console.log(req.body.url);
+    let uname = req.body.uname;
+    let standardImg = ''
     let bitmap1 = Buffer.from(req.body.url, 'base64');//解码图片
     fs.writeFileSync('tmp/verify.jpg',bitmap1);
-    youtu.facecompare('../music/static/upload/1555310082788.jpeg', 'tmp/verify.jpg', (data) => {
-        console.log(data);
-        if (data.httpcode === 200) {
-            if(data.data.errorcode === -1101){
-                res.send({
-                    status: 1,
-                    msg: '未发现人脸'
-                })
-            } else if (data.data.errorcode !== 0) {
-                res.send({
-                    status: 1,
-                    msg: '未知错误，错误码：' + data.data.errorcode
-                })
-            }else if (data.data.similarity > 80) {
-                res.send({
-                    status: 0,
-                    msg: '验证通过'
-                })
-            } else {
-                res.send({
-                    status: 1,
-                    msg: '验证未通过'
-                })
-            }
+    let selectSql = 'SELECT reg_time FROM music.user WHERE uname=?'
+    pool.query(selectSql, [uname], (err, ress, filed) => {
+        if (err) throw err;
+        if (ress.length > 0) {
+           standardImg = ress[0].reg_time;
+           let imgA = '../music/static/upload/' + standardImg + '.jpeg';
+           let imgB = 'tmp/verify.jpg';
+           loginCompareFace(imgA, imgB, res)
         } else {
             res.send({
                 status: 1,
-                msg: '第三方出错，请重试'
+                msg: '核验出错，请核对用户名以及密码'
             })
         }
     })
 })
 
+app.post('/passLogin',(req,res) => {
+    let uname = req.body.uname;
+    let pass = req.body.password;
+    console.log(uname,pass);
+})
+
 function saveAndVerify(req, res){
+    console.log('获取图片中');
     let uname = req.body.uname;
     let upwd = req.body.upwd;
     let file = req.file;
@@ -183,7 +174,7 @@ function saveAndVerify(req, res){
     fileInfo.originalname = file.originalname;
     fileInfo.size = file.size;
     fileInfo.path = file.path;
-
+    console.log('执行人脸检测中');
     youtu.detectface(newName, 1, (data)=>{
         if (data.data.errorcode === -1101 && data.httpcode === 200) {
             res.send({
@@ -191,8 +182,6 @@ function saveAndVerify(req, res){
                 msg: '未识别到人脸，请更换图片'
             })
             fs.unlinkSync(newName)
-            res.end()
-            return false
         } else if (data.data.errorcode === 0) {
             // console.log(data);
             console.log(data.data.face[0].beauty);
@@ -223,6 +212,40 @@ function insertIntoUser(req, res, beauty,timeStamp){
             res.send({
                 status: 1,
                 msg: '上传失败'
+            })
+        }
+    })
+}
+
+function loginCompareFace(imgA,imgB, res) {
+    youtu.facecompare(imgA, imgB, (data) => {
+        console.log(data);
+        if (data.httpcode === 200) {
+            if(data.data.errorcode === -1101){
+                res.send({
+                    status: 1,
+                    msg: '未发现人脸'
+                })
+            } else if (data.data.errorcode !== 0) {
+                res.send({
+                    status: 1,
+                    msg: '未知错误，错误码：' + data.data.errorcode
+                })
+            }else if (data.data.similarity > 80) {
+                res.send({
+                    status: 0,
+                    msg: '验证通过'
+                })
+            } else {
+                res.send({
+                    status: 1,
+                    msg: '验证未通过'
+                })
+            }
+        } else {
+            res.send({
+                status: 1,
+                msg: '第三方出错，请重试'
             })
         }
     })

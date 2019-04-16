@@ -1,5 +1,5 @@
 <template>
-  <div class="reg-page">
+  <div class="reg-page" :loading="pageLoading">
     <div style="width: 600px; margin: 50px auto; text-align: center">
       <div class="header">
         用户注册
@@ -92,7 +92,8 @@ export default {
       imgSrc: '',
       height: 600,
       width: 600,
-      host: 'http://localhost:3000/'
+      host: 'http://localhost:3000/',
+      pageLoading: false
     }
   },
   methods: {
@@ -131,6 +132,7 @@ export default {
     },
     submitIt: function () {
       if (this.unameResult&& this.upwdResult && this.verifyUpwdResult && this.$refs.file.value) {
+        this.pageLoading = true
         let formData = new FormData();
         formData.append('uname', this.uname)
         formData.append('upwd', this.upwd)
@@ -145,6 +147,7 @@ export default {
             let data = res.data
             if (data.status === 0) {
               self.$message.success('注册成功，魅力值：' + data.msg)
+              self.$emit('login')
             } else if (data.status === 1) {
               self.$message.error(data.msg)
             }
@@ -152,6 +155,7 @@ export default {
           .catch(() => {
             self.$message.error('注册失败')
           })
+        this.pageLoading = false
       } else {
         this.$message.error('请改正表单错误后再提交')
       }

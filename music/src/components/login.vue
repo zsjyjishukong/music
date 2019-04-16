@@ -39,7 +39,8 @@ export default {
       username: '',
       password: '',
       allowMedia: '',
-      video: ''
+      video: '',
+      timer: ''
     }
   },
   methods: {
@@ -96,13 +97,13 @@ export default {
       let self = this
       let canvas = document.getElementById('canvas')
       let context = canvas.getContext('2d');
-      setInterval(function () {
+      let timer = setInterval(function () {
         context.drawImage(video,0,0,480,320);
         let img=canvas.toDataURL('image/jpg')
         // {#获取完整的base64编码#}
         img=img.split(',')[1]
         //将照片以base64用ajax传到后台
-        self.$http.post(self.host + 'faceLogin', {url: img})
+        self.$http.post(self.host + 'faceLogin', {url: img, uname: self.username})
           .then((res) =>{
             if (res.data.status === 0) {
               self.$message.success('验证通过')
@@ -111,6 +112,7 @@ export default {
             }
           })
       },10000)
+      this.timer = timer
     },
     passLogin: function () {
       let self = this
@@ -118,6 +120,7 @@ export default {
         .then((res) => {
           if (res.data.status === 0) {
             self.$message.success('登录成功')
+            clearInterval(this.timer)
           } else {
             self.$message.error('用户名密码错误')
           }
@@ -128,8 +131,22 @@ export default {
         })
     },
     login: function () {
-      this.allowLogin = true
-      this.postFace(this.video)
+      if (this.username.trim() !== '') {
+        if (this.password.trim() !== '') {
+          this.passLogin()
+        } else {
+          if (this.allowMedia) {
+            this.allowLogin = true
+            this.postFace(this.video)
+          } else {
+            this.$message.error('请输入密码')
+            return false
+          }
+        }
+      } else {
+        this.$message.error('请输入用户名')
+        return false
+      }
     }
   },
   mounted: function () {

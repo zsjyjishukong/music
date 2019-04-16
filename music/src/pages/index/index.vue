@@ -26,7 +26,7 @@
   </header>
   <search v-if="headerSelected === 'find'"></search>
   <mine v-if="headerSelected === 'find'"></mine>
-  <reg v-if="headerSelected === 'reg'"></reg>
+  <reg v-if="headerSelected === 'reg'" v-on:login="login"></reg>
   <login v-if="headerSelected === 'login'"></login>
   <footer>
     <div id="footer-container">
