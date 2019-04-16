@@ -12,7 +12,7 @@
               <div class="password inputs">
                 <i class="fas fa-unlock-alt"></i>
                 <span class="line">|</span>
-                <input type="text" class="input-text" placeholder="密码" v-model="password">
+                <input type="password" class="input-text" placeholder="密码" v-model="password">
               </div>
               <div class="inputs" style="background: none;">
                 <button class="submit-it" @click="login">登录</button>
@@ -94,24 +94,9 @@ export default {
       console.log('访问用户媒体失败：',error.name,error.message);
     },
     postFace: function (video) {
-      let self = this
       let canvas = document.getElementById('canvas')
       let context = canvas.getContext('2d');
-      let timer = setInterval(function () {
-        context.drawImage(video,0,0,480,320);
-        let img=canvas.toDataURL('image/jpg')
-        // {#获取完整的base64编码#}
-        img=img.split(',')[1]
-        //将照片以base64用ajax传到后台
-        self.$http.post(self.host + 'faceLogin', {url: img, uname: self.username})
-          .then((res) =>{
-            if (res.data.status === 0) {
-              self.$message.success('验证通过')
-            } else if (res.data.status === 1){
-              self.$message.error(res.data.msg)
-            }
-          })
-      },10000)
+      let timer = setInterval(this.faceLoginFunc(context,canvas),10000)
       this.timer = timer
     },
     passLogin: function () {
@@ -147,6 +132,23 @@ export default {
         this.$message.error('请输入用户名')
         return false
       }
+    },
+    faceLoginFunc: function (context, canvas) {
+      let self = this
+      context.drawImage(video,0,0,480,320);
+      let img=canvas.toDataURL('image/jpg')
+      // {#获取完整的base64编码#}
+      img=img.split(',')[1]
+      //将照片以base64用ajax传到后台
+      self.$http.post(self.host + 'faceLogin', {url: img, uname: self.username})
+        .then((res) =>{
+          if (res.data.status === 0) {
+            self.$message.success('验证通过')
+            clearInterval(self.timer)
+          } else if (res.data.status === 1){
+            self.$message.error(res.data.msg)
+          }
+        })
     }
   },
   mounted: function () {

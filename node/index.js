@@ -126,7 +126,7 @@ app.post('/reg', multer({
             })
             return;
         } else {
-            saveAndVerify(req,res)
+            res.send(saveAndVerify(req))
         }
     })
 });
@@ -143,7 +143,7 @@ app.post('/faceLogin', (req, res) => {
            standardImg = ress[0].reg_time;
            let imgA = '../music/static/upload/' + standardImg + '.jpeg';
            let imgB = 'tmp/verify.jpg';
-           loginCompareFace(imgA, imgB, res)
+           loginCompareFace(imgA, imgB, res);
         } else {
             res.send({
                 status: 1,
@@ -156,10 +156,24 @@ app.post('/faceLogin', (req, res) => {
 app.post('/passLogin',(req,res) => {
     let uname = req.body.uname;
     let pass = req.body.password;
-    console.log(uname,pass);
+    let verifySql = 'SELECT * FROM music.user WHERE uname=? AND upwd=?';
+    pool.query(verifySql,[uname, pass], (err, ress, filed)=>{
+        if (err) throw err;
+        if (ress.length === 1) {
+            res.send({
+                status: 0,
+                msg: '登录成功'
+            })
+        } else {
+            res.send({
+                status: 1,
+                msg: '登录失败，请检查用户名密码'
+            })
+        }
+    })
 })
 
-function saveAndVerify(req, res){
+function saveAndVerify(req){
     console.log('获取图片中');
     let uname = req.body.uname;
     let upwd = req.body.upwd;
@@ -177,47 +191,42 @@ function saveAndVerify(req, res){
     console.log('执行人脸检测中');
     youtu.detectface(newName, 1, (data)=>{
         if (data.data.errorcode === -1101 && data.httpcode === 200) {
-            res.send({
+            return {
                 status: 1,
                 msg: '未识别到人脸，请更换图片'
-            })
-            fs.unlinkSync(newName)
+            }
         } else if (data.data.errorcode === 0) {
-            // console.log(data);
-            console.log(data.data.face[0].beauty);
-            beauty = data.data.face[0].beauty
-            insertIntoUser(req, res, beauty, timeStamp)
+            beauty = data.data.face[0].beauty;
+            let result = insertIntoUser(uname, upwd, beauty, timeStamp);
+            return result;
         } else if (data.httpcode !== 200) {
-            res.send({
+            return {
                 status: 1,
                 msg: '第三方错误，请重试'
-            })
-            fs.unlinkSync(newName)
+            }
         }
     })
 }
 
-function insertIntoUser(req, res, beauty,timeStamp){
-    let uname = req.body.uname
-    let upwd = req.body.upwd
+function insertIntoUser(uname, upwd, beauty,timeStamp){
     let sql = 'INSERT INTO music.user VALUES (NULL,?,?,?)';
     pool.query(sql, [uname, upwd,timeStamp], (err, ress, filed) => {
         if (err) throw err;
         if (ress.affectedRows > 0) {
-            res.send({
+            return{
                 status: 0,
                 msg: beauty
-            })
+            }
         } else {
-            res.send({
+            return {
                 status: 1,
                 msg: '上传失败'
-            })
+            }
         }
     })
 }
 
-function loginCompareFace(imgA,imgB, res) {
+function loginCompareFace(imgA, imgB, res) {
     youtu.facecompare(imgA, imgB, (data) => {
         console.log(data);
         if (data.httpcode === 200) {
@@ -232,15 +241,15 @@ function loginCompareFace(imgA,imgB, res) {
                     msg: '未知错误，错误码：' + data.data.errorcode
                 })
             }else if (data.data.similarity > 80) {
-                res.send({
-                    status: 0,
-                    msg: '验证通过'
-                })
+               res.send({
+                   status: 0,
+                   msg: '验证通过'
+               })
             } else {
-                res.send({
-                    status: 1,
-                    msg: '验证未通过'
-                })
+               res.send({
+                   status: 1,
+                   msg: '验证未通过'
+               })
             }
         } else {
             res.send({
