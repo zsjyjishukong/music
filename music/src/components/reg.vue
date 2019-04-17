@@ -114,7 +114,6 @@ export default {
     checkUpwd: function () {
       let upwd = this.upwd
       let upwdResult = upwd.search(/\w{6,}/)
-      console.log(upwdResult);
       if (upwdResult === -1){
         this.upwdResult = false
       } else {
@@ -146,8 +145,9 @@ export default {
           .then((res) => {
             let data = res.data
             if (data.status === 0) {
+              localStorage.setItem('uname', self.uname)
               self.$message.success('注册成功，魅力值：' + data.msg)
-              self.$emit('login')
+              self.$emit('changeHeader','login')
             } else if (data.status === 1) {
               self.$message.error(data.msg)
             }

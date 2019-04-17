@@ -3,7 +3,7 @@
       <div class="login-page-page">
         <div class="login">
           <div style="background: rgba(194,12,12,0.3); margin-top: 30px;">
-            <div class="login-father">
+            <div class="login-father" @keydown.13="login">
               <div class="username inputs">
                 <i class="fas fa-user"></i>
                 <span class="line">|</span>
@@ -36,7 +36,7 @@ export default {
       stream: '',
       host: 'http://localhost:3000/',
       allowLogin: false,
-      username: '',
+      username: localStorage.getItem('uname'),
       password: '',
       allowMedia: '',
       video: '',
@@ -105,7 +105,9 @@ export default {
         .then((res) => {
           if (res.data.status === 0) {
             self.$message.success('登录成功')
+            localStorage.setItem('uname', self.username)
             clearInterval(this.timer)
+            self.toMine()
           } else {
             self.$message.error('用户名密码错误')
           }
@@ -144,11 +146,16 @@ export default {
         .then((res) =>{
           if (res.data.status === 0) {
             self.$message.success('验证通过')
+            localStorage.setItem('uname', self.username)
             clearInterval(self.timer)
+            self.toMine()
           } else if (res.data.status === 1){
             self.$message.error(res.data.msg)
           }
         })
+    },
+    toMine: function (img) {
+      this.$emit('changeHeader', 'mine', img)
     }
   },
   mounted: function () {

@@ -15,19 +15,19 @@
       </div>
       <div class="user">
         <div class="login" v-if="!isLogin">
-          <span class="login-span" @click="login">登录</span>
-          <span class="reg-span" @click="reg">注册</span>
+          <span class="login-span" @click="changeMusicType('login')">登录</span>
+          <span class="reg-span" @click="changeMusicType('reg')">注册</span>
         </div>
         <div class="head" v-if="isLogin">
-          <img id="header-head-img" src="@/assets/head.jpg" title="退出登录" height="40px" @click="logout">
+          <img id="header-head-img" :src="img" title="退出登录" height="40px" @click="logout">
         </div>
       </div>
     </div>
   </header>
   <search v-if="headerSelected === 'find'"></search>
-  <mine v-if="headerSelected === 'find'"></mine>
-  <reg v-if="headerSelected === 'reg'" v-on:login="login"></reg>
-  <login v-if="headerSelected === 'login'"></login>
+  <mine v-if="headerSelected === 'mine'"></mine>
+  <reg v-if="headerSelected === 'reg'" v-on:changeHeader="changeMusicType"></reg>
+  <login v-if="headerSelected === 'login'" @changeHeader="changeMusicType"></login>
   <footer>
     <div id="footer-container">
       <ul>
@@ -66,21 +66,24 @@ export default {
   data() {
     return {
       isLogin: false,
-      headerSelected: 'find'
+      headerSelected: 'find',
+      img: ''
     }
   },
   methods: {
-    login: function () {
-      this.headerSelected = 'login'
-    },
-    reg:function () {
-      this.headerSelected = 'reg'
-    },
     logout: function () {
       this.isLogin = false
     },
     changeMusicType: function (name) {
       this.headerSelected = name
+      if (name === 'mine'){
+        setTimeout(this.login(), 20000)
+      }
+    },
+    login: function () {
+      let time = localStorage.getItem('img')
+      console.log(time);
+      this.img = '/static/upload/' + time + '.jpeg'
     }
   }
 }

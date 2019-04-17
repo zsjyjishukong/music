@@ -1,10 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
-const multer = require('multer')
-const bodyParser = require('body-parser')
-const fs = require('fs')
+const multer = require('multer');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const cookieParser = require('cookie-parser');
 
-const tencentyoutuyun = require('tencentyoutuyun')
+const tencentyoutuyun = require('tencentyoutuyun');
 const conf  = tencentyoutuyun.conf;
 const youtu = tencentyoutuyun.youtu;
 
@@ -20,6 +21,7 @@ let mysql_pass = 'root';
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: '5mb'}));
+app.use(cookieParser('aaa'));
 let pool = mysql.createPool({
     user: mysql_user,
     password: mysql_pass
@@ -124,9 +126,8 @@ app.post('/reg', multer({
                 status: 1,
                 msg: '用户名已存在'
             })
-            return;
         } else {
-            res.send(saveAndVerify(req))
+            saveAndVerify(req,res)
         }
     })
 });
@@ -143,7 +144,7 @@ app.post('/faceLogin', (req, res) => {
            standardImg = ress[0].reg_time;
            let imgA = '../music/static/upload/' + standardImg + '.jpeg';
            let imgB = 'tmp/verify.jpg';
-           loginCompareFace(imgA, imgB, res);
+           loginCompareFace(imgA, imgB, res, uname);
         } else {
             res.send({
                 status: 1,
@@ -160,6 +161,8 @@ app.post('/passLogin',(req,res) => {
     pool.query(verifySql,[uname, pass], (err, ress, filed)=>{
         if (err) throw err;
         if (ress.length === 1) {
+            res.cookie('user',uname,{maxAge:600000,signed:true});  //signed 表示对cookie加密
+            res.cookie('img',ress[0].reg_time,{maxAge:600000,signed:false});  //signed 表示对cookie加密
             res.send({
                 status: 0,
                 msg: '登录成功'
@@ -173,7 +176,7 @@ app.post('/passLogin',(req,res) => {
     })
 })
 
-function saveAndVerify(req){
+function saveAndVerify(req,res){
     console.log('获取图片中');
     let uname = req.body.uname;
     let upwd = req.body.upwd;
@@ -191,14 +194,13 @@ function saveAndVerify(req){
     console.log('执行人脸检测中');
     youtu.detectface(newName, 1, (data)=>{
         if (data.data.errorcode === -1101 && data.httpcode === 200) {
-            return {
+            res.send({
                 status: 1,
                 msg: '未识别到人脸，请更换图片'
-            }
+            })
         } else if (data.data.errorcode === 0) {
             beauty = data.data.face[0].beauty;
-            let result = insertIntoUser(uname, upwd, beauty, timeStamp);
-            return result;
+            insertIntoUser(uname, upwd, beauty, timeStamp, res);
         } else if (data.httpcode !== 200) {
             return {
                 status: 1,
@@ -208,27 +210,26 @@ function saveAndVerify(req){
     })
 }
 
-function insertIntoUser(uname, upwd, beauty,timeStamp){
+function insertIntoUser(uname, upwd, beauty,timeStamp, res){
     let sql = 'INSERT INTO music.user VALUES (NULL,?,?,?)';
     pool.query(sql, [uname, upwd,timeStamp], (err, ress, filed) => {
         if (err) throw err;
         if (ress.affectedRows > 0) {
-            return{
+            res.send({
                 status: 0,
                 msg: beauty
-            }
+            })
         } else {
-            return {
+            res.send({
                 status: 1,
-                msg: '上传失败'
-            }
+                msg: '数据库写入失败'
+            })
         }
     })
 }
 
-function loginCompareFace(imgA, imgB, res) {
+function loginCompareFace(imgA, imgB, res, uname) {
     youtu.facecompare(imgA, imgB, (data) => {
-        console.log(data);
         if (data.httpcode === 200) {
             if(data.data.errorcode === -1101){
                 res.send({
@@ -241,6 +242,9 @@ function loginCompareFace(imgA, imgB, res) {
                     msg: '未知错误，错误码：' + data.data.errorcode
                 })
             }else if (data.data.similarity > 80) {
+               let time = (imgA.split('/')[4]).split('.')[0];
+               res.cookie('user',uname,{maxAge:600000,signed:true,httpOnly: true});  //signed 表示对cookie加密
+               res.cookie('img',time,{maxAge:600000,signed:false,httpOnly: true});  //signed 表示对cookie加密
                res.send({
                    status: 0,
                    msg: '验证通过'
