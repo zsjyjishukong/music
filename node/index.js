@@ -165,7 +165,8 @@ app.post('/passLogin',(req,res) => {
             res.cookie('img',ress[0].reg_time,{maxAge:600000,signed:false});  //signed 表示对cookie加密
             res.send({
                 status: 0,
-                msg: '登录成功'
+                msg: '登录成功',
+                img: ress[0].reg_time
             })
         } else {
             res.send({
@@ -241,13 +242,14 @@ function loginCompareFace(imgA, imgB, res, uname) {
                     status: 1,
                     msg: '未知错误，错误码：' + data.data.errorcode
                 })
-            }else if (data.data.similarity > 80) {
+            }else if (data.data.similarity > 90) {
                let time = (imgA.split('/')[4]).split('.')[0];
                res.cookie('user',uname,{maxAge:600000,signed:true,httpOnly: true});  //signed 表示对cookie加密
-               res.cookie('img',time,{maxAge:600000,signed:false,httpOnly: true});  //signed 表示对cookie加密
+               res.cookie('img',time,{maxAge:600000,signed:false,httpOnly: false});  //signed 表示对cookie加密
                res.send({
                    status: 0,
-                   msg: '验证通过'
+                   msg: '验证通过',
+                   img: time
                })
             } else {
                res.send({

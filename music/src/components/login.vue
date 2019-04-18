@@ -2,7 +2,11 @@
     <div class="login-page">
       <div class="login-page-page">
         <div class="login">
-          <div style="background: rgba(194,12,12,0.3); margin-top: 30px;">
+          <div style="background: rgba(194,12,12,0.3); margin-top: 30px;"
+               v-loading="pageLoading"
+               :element-loading-text="loadingText"
+               element-loading-spinner="el-icon-loading"
+               element-loading-background="rgba(0, 0, 0, 0.8)">
             <div class="login-father" @keydown.13="login">
               <div class="username inputs">
                 <i class="fas fa-user"></i>
@@ -40,7 +44,9 @@ export default {
       password: '',
       allowMedia: '',
       video: '',
-      timer: ''
+      timer: '',
+      pageLoading: false,
+      loadingText: ''
     }
   },
   methods: {
@@ -106,24 +112,32 @@ export default {
           if (res.data.status === 0) {
             self.$message.success('登录成功')
             localStorage.setItem('uname', self.username)
+            sessionStorage.setItem('uname', self.username)
+            sessionStorage.setItem('img', res.data.img)
             clearInterval(this.timer)
             self.toMine()
           } else {
             self.$message.error('用户名密码错误')
           }
+          self.pageLoading = false
         })
         .catch((err) => {
           self.$message.error('网络错误')
           console.log('网络错误' + err);
+          self.pageLoading = false
         })
     },
     login: function () {
       if (this.username.trim() !== '') {
         if (this.password.trim() !== '') {
+          this.pageLoading = true
+          this.loadingText = '用户名密码登录中……'
           this.passLogin()
         } else {
           if (this.allowMedia) {
             this.allowLogin = true
+            this.pageLoading = true
+            this.loadingText = '人脸识别登录中，如果长时间无响应请刷新页面……'
             this.postFace(this.video)
           } else {
             this.$message.error('请输入密码')
@@ -137,6 +151,7 @@ export default {
     },
     faceLoginFunc: function (context, canvas) {
       let self = this
+      this.pageLoading = true
       context.drawImage(video,0,0,480,320);
       let img=canvas.toDataURL('image/jpg')
       // {#获取完整的base64编码#}
@@ -145,13 +160,24 @@ export default {
       self.$http.post(self.host + 'faceLogin', {url: img, uname: self.username})
         .then((res) =>{
           if (res.data.status === 0) {
-            self.$message.success('验证通过')
+            self.$message.success('登录成功')
             localStorage.setItem('uname', self.username)
+            sessionStorage.setItem('uname', self.username)
+            sessionStorage.setItem('img', res.data.img)
             clearInterval(self.timer)
-            self.toMine()
+            setTimeout(function () {
+              self.toMine()
+            }, 500)
+
           } else if (res.data.status === 1){
             self.$message.error(res.data.msg)
           }
+          self.pageLoading = false
+        })
+        .catch((err) => {
+          self.$message.error('网络错误')
+          console.log('网络错误：' + err);
+          self.pageLoading = false
         })
     },
     toMine: function (img) {

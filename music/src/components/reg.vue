@@ -1,5 +1,5 @@
 <template>
-  <div class="reg-page" :loading="pageLoading">
+  <div class="reg-page">
     <div style="width: 600px; margin: 50px auto; text-align: center">
       <div class="header">
         用户注册
@@ -93,7 +93,8 @@ export default {
       height: 600,
       width: 600,
       host: 'http://localhost:3000/',
-      pageLoading: false
+      pageLoading: false,
+      loadingText: '人脸识别登录中，如果长时间无响应请刷新页面……'
     }
   },
   methods: {

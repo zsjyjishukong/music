@@ -6,7 +6,14 @@
 
 <script>
 export default {
-  name: 'mine'
+  name: 'mine',
+  mounted: function () {
+    if (sessionStorage.getItem('uname')) {
+
+    } else{
+      this.$emit('changeHeader', 'login')
+    }
+  }
 }
 </script>
 

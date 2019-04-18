@@ -5,7 +5,7 @@
       <img src="@/assets/logo.png" height="50px;" id="logo">
       <ul id="music-type">
         <li :class="{'header-selected': headerSelected === 'find'}" @click="changeMusicType('find')">发现音乐</li>
-        <li :class="{'header-selected': headerSelected === 'my'}" @click="changeMusicType('my')">我的音乐</li>
+        <li :class="{'header-selected': headerSelected === 'mine'}" @click="changeMusicType('mine')">我的音乐</li>
       </ul>
       <div class="search">
         <div class="search-container">
@@ -19,13 +19,13 @@
           <span class="reg-span" @click="changeMusicType('reg')">注册</span>
         </div>
         <div class="head" v-if="isLogin">
-          <img id="header-head-img" :src="img" title="退出登录" height="40px" @click="logout">
+          <img id="header-head-img" :src="img" title="退出登录" height="40px" width="40px" @click="logout">
         </div>
       </div>
     </div>
   </header>
   <search v-if="headerSelected === 'find'"></search>
-  <mine v-if="headerSelected === 'mine'"></mine>
+  <mine v-if="headerSelected === 'mine'" @changeHeader="changeMusicType"></mine>
   <reg v-if="headerSelected === 'reg'" v-on:changeHeader="changeMusicType"></reg>
   <login v-if="headerSelected === 'login'" @changeHeader="changeMusicType"></login>
   <footer>
@@ -73,17 +73,25 @@ export default {
   methods: {
     logout: function () {
       this.isLogin = false
+      sessionStorage.clear()
     },
     changeMusicType: function (name) {
       this.headerSelected = name
-      if (name === 'mine'){
-        setTimeout(this.login(), 20000)
+      if (sessionStorage.getItem('uname')){
+        this.isLogin = true
       }
-    },
-    login: function () {
-      let time = localStorage.getItem('img')
-      console.log(time);
-      this.img = '/static/upload/' + time + '.jpeg'
+    }
+  },
+  mounted: function () {
+    if (sessionStorage.getItem('uname')){
+      this.isLogin = true
+      this.img = '/static/upload/' + sessionStorage.getItem('img') + '.jpeg'
+    }
+  },
+  beforeUpdate: function () {
+    if (sessionStorage.getItem('uname')){
+      this.isLogin = true
+      this.img = '/static/upload/' + sessionStorage.getItem('img') + '.jpeg'
     }
   }
 }
@@ -185,6 +193,9 @@ export default {
   }
   #header-head-img{
     border-radius: 20px;
+    position: relative;
+    top: 18px;
+    cursor: pointer;
   }
   .header-selected{
     background: #000;
