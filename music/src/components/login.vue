@@ -38,7 +38,7 @@ export default {
   data(){
     return{
       stream: '',
-      host: 'http://localhost:3000/',
+      host: 'http://ceshi.hebiace.net:3000/',
       allowLogin: false,
       username: localStorage.getItem('uname'),
       password: '',

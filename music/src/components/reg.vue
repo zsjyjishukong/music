@@ -92,7 +92,7 @@ export default {
       imgSrc: '',
       height: 600,
       width: 600,
-      host: 'http://localhost:3000/',
+      host: 'http://ceshi.hebiace.net:3000/',
       pageLoading: false,
       loadingText: '人脸识别登录中，如果长时间无响应请刷新页面……'
     }

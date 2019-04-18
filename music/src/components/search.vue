@@ -72,7 +72,8 @@ export default {
       searchResult: [],
       path: '/static/music/',
       searchText: '',
-      searchResultDispaly: {display: 'none'}
+      searchResultDispaly: {display: 'none'},
+      host: 'http://ceshi.hebiace.net:3000/'
     }
   },
   methods: {
@@ -97,7 +98,7 @@ export default {
     search: function () {
       let self = this
       this.searchResultDispaly.display = 'block';
-      this.$http.get('http://localhost:3000/search?name=' + self.searchText)
+      this.$http.get(this.host+'search?name=' + self.searchText)
         .then(function (res) {
           if (res.data.status === 0){
             self.searchResult = []
