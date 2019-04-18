@@ -15,8 +15,8 @@ let secretKey = 'yWknsOn7qQuFiqAIjCZoqhTDpPtBE5sV';
 let userid = '1361882279';
 conf.setAppInfo(appid, secretId, secretKey, userid, 0)
 
-let mysql_user = 'root';
-let mysql_pass = 'root';
+let mysql_user = 'music';
+let mysql_pass = '8Us182KR';
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
