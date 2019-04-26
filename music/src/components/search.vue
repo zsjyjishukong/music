@@ -65,6 +65,11 @@
 <script>
 export default {
   name: 'search',
+  props: {
+    host:{
+      type: Array
+    }
+  },
   data () {
     return {
       headerSelected: 'song',
@@ -97,7 +102,7 @@ export default {
     search: function () {
       let self = this
       this.searchResultDispaly.display = 'block';
-      this.$http.get('http://localhost:3000/search?name=' + self.searchText)
+      this.$http.get(this.host + 'search?name=' + self.searchText)
         .then(function (res) {
           if (res.data.status === 0){
             self.searchResult = []

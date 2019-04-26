@@ -35,10 +35,14 @@
 <script>
 export default {
   name: 'login',
+  props: {
+    host:{
+      type: Array
+    }
+  },
   data(){
     return{
       stream: '',
-      host: 'http://localhost:3000/',
       allowLogin: false,
       username: localStorage.getItem('uname'),
       password: '',

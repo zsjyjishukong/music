@@ -4,6 +4,7 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
+const conn = require('./conn')
 
 const tencentyoutuyun = require('tencentyoutuyun');
 const conf  = tencentyoutuyun.conf;
@@ -15,9 +16,8 @@ let secretKey = 'yWknsOn7qQuFiqAIjCZoqhTDpPtBE5sV';
 let userid = '1361882279';
 conf.setAppInfo(appid, secretId, secretKey, userid, 0)
 
-let mysql_user = 'root';
-let mysql_pass = 'root';
-
+let mysql_user = conn.user;
+let mysql_pass = conn.pass;
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: '5mb'}));
@@ -33,7 +33,6 @@ app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Methods','PUT,POST,GET,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    // res.header('Access-Control-Allow-Methods', '*');
     res.header('Content-Type', 'application/json;charset=utf-8');
     next();
 });
@@ -177,8 +176,27 @@ app.post('/passLogin',(req,res) => {
     })
 })
 
+app.post('/adminLogin',(req, res) => {
+    let selectSql = 'SELECT * FROM music.admin WHERE admin_name=? AND admin_pass=?';
+    let aname = req.body.aname;
+    let apass = req.body.apass;
+    pool.query(selectSql, [aname, apass], (err, ress, field) => {
+        if (err) throw err;
+        console.log(ress);
+        if (ress.length === 1) {
+            res.send({
+                status: 0,
+                msg: '登录成功'
+            })
+        } else {
+            res.send({
+                status: 1,
+                msg: '用户名密码错误'
+            })
+        }
+    })
+})
 function saveAndVerify(req,res){
-    console.log('获取图片中');
     let uname = req.body.uname;
     let upwd = req.body.upwd;
     let file = req.file;
@@ -265,5 +283,6 @@ function loginCompareFace(imgA, imgB, res, uname) {
         }
     })
 }
+
 
 app.listen(3000);

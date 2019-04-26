@@ -24,33 +24,11 @@
       </div>
     </div>
   </header>
-  <search v-if="headerSelected === 'find'"></search>
+  <search v-if="headerSelected === 'find'" :host="host"></search>
   <mine v-if="headerSelected === 'mine'" @changeHeader="changeMusicType"></mine>
-  <reg v-if="headerSelected === 'reg'" v-on:changeHeader="changeMusicType"></reg>
-  <login v-if="headerSelected === 'login'" @changeHeader="changeMusicType"></login>
-  <footer>
-    <div id="footer-container">
-      <ul>
-        <li>关于往忆</li>
-        <span class="line">|</span>
-        <li>客户服务</li>
-        <span class="line">|</span>
-        <li>服务条款</li>
-        <span class="line">|</span>
-        <li>网站导航</li>
-        <span class="line">|</span>
-        <li>意见反馈</li>
-      </ul>
-      <div>
-        <span class="copyright">往忆公司版权所有&copy;1997-2019</span>
-        <span class="copyright">航舟勒毒科技有限公司运营：这网文[0000]0000-000号</span>
-      </div>
-      <div>
-        <span class="copyright">违法和不良信息举报电话：0000-0000</span>
-        <span class="copyright">举报邮箱：0000@000.com</span>
-      </div>
-    </div>
-  </footer>
+  <reg v-if="headerSelected === 'reg'" v-on:changeHeader="changeMusicType" :host="host"></reg>
+  <login v-if="headerSelected === 'login'" @changeHeader="changeMusicType" :host="host"></login>
+  <foot></foot>
 </div>
 </template>
 
@@ -59,15 +37,17 @@ import Search from "../../components/search";
 import Mine from "../../components/mine";
 import Reg from '../../components/reg'
 import Login from '../../components/login'
+import Foot from '../../components/footer'
 
 export default {
   name: 'index',
-  components: {Search, Mine, Reg, Login},
+  components: {Search, Mine, Reg, Login, Foot},
   data() {
     return {
       isLogin: false,
       headerSelected: 'find',
-      img: ''
+      img: '',
+      host: 'http://localhost:3000/'
     }
   },
   methods: {
@@ -200,38 +180,5 @@ export default {
   .header-selected{
     background: #000;
     color: #fff;
-  }
-  footer{
-    color: #666;
-    background: #f2f2f2;
-    height: 90px;
-    font-size: 10px;
-  }
-  #footer-container{
-    width: 900px;
-    margin: auto;
-    text-align: left;
-    font-size: 12px;
-    line-height: 25px;
-    user-select: none;
-  }
-  #footer-container li{
-    display: inline-block;
-    color: #999;
-    margin: 0 5px;
-    font-size: 12px;
-  }
-  #footer-container li:hover{
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  .line{
-    color: #c2c2c2;
-    font-size: 12px;
-  }
-  .copyright{
-    display: inline-block;
-    margin: 0 20px 0 5px;
-    font-size: 12px;
   }
 </style>
