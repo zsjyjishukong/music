@@ -80,7 +80,7 @@
 export default {
   name: 'reg',
   props: {
-    host:{
+    host: {
       type: String
     }
   },
@@ -119,7 +119,7 @@ export default {
     checkUpwd: function () {
       let upwd = this.upwd
       let upwdResult = upwd.search(/\w{6,}/)
-      if (upwdResult === -1){
+      if (upwdResult === -1) {
         this.upwdResult = false
       } else {
         this.upwdResult = true
@@ -135,9 +135,9 @@ export default {
       }
     },
     submitIt: function () {
-      if (this.unameResult&& this.upwdResult && this.verifyUpwdResult && this.$refs.file.value) {
+      if (this.unameResult && this.upwdResult && this.verifyUpwdResult && this.$refs.file.value) {
         this.pageLoading = true
-        let formData = new FormData();
+        let formData = new FormData()
         formData.append('uname', this.uname)
         formData.append('upwd', this.upwd)
         formData.append('file', this.dataURLtoFile(this.imgSrc))
@@ -152,7 +152,7 @@ export default {
             if (data.status === 0) {
               localStorage.setItem('uname', self.uname)
               self.$message.success('注册成功，魅力值：' + data.msg)
-              self.$emit('changeHeader','login')
+              self.$emit('changeHeader', 'login')
             } else if (data.status === 1) {
               self.$message.error(data.msg)
             }
@@ -164,66 +164,67 @@ export default {
       } else {
         this.$message.error('请改正表单错误后再提交')
       }
-
     },
     fileChange: function () {
-      let inputDOM = this.$refs.file;
+      let inputDOM = this.$refs.file
       let self = this
-      let file = inputDOM.files[0];
+      let file = inputDOM.files[0]
       // 压缩图片需要的一些元素和对象
-      let reader = new FileReader(), img = new Image();
+      let reader = new FileReader()
+      let img = new Image()
       // 缩放图片需要的canvas
-      let canvas = document.createElement('canvas');
+      let canvas = document.createElement('canvas')
       canvas.style.display = 'none'
-      let context = canvas.getContext('2d');
-      // base64地址图片加载完毕后
+      let context = canvas.getContext('2d')
+      //  base64地址图片加载完毕后
       img.onload = function () {
-        // 图片原始尺寸
-        let originWidth = this.width;
-        let originHeight = this.height;
-        // 最大尺寸限制
-        let maxWidth = self.width,
-          maxHeight = self.height;
-        // 目标尺寸
-        let targetWidth = originWidth, targetHeight = originHeight;
-        // 图片尺寸超过600x600的限制
+        //  图片原始尺寸
+        let originWidth = this.width
+        let originHeight = this.height
+        //  最大尺寸限制
+        let maxWidth = self.width
+        let maxHeight = self.height
+        //  目标尺寸
+        let targetWidth = originWidth
+        let targetHeight = originHeight
+        //  图片尺寸超过600x600的限制
         if (originWidth > maxWidth || originHeight > maxHeight) {
           if (originWidth / originHeight > maxWidth / maxHeight) {
             // 更宽，按照宽度限定尺寸
-            targetWidth = maxWidth;
-            targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+            targetWidth = maxWidth
+            targetHeight = Math.round(maxWidth * (originHeight / originWidth))
           } else {
-            targetHeight = maxHeight;
-            targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+            targetHeight = maxHeight
+            targetWidth = Math.round(maxHeight * (originWidth / originHeight))
           }
         }
         // canvas对图片进行缩放
-        canvas.width = targetWidth;
-        canvas.height = targetHeight;
+        canvas.width = targetWidth
+        canvas.height = targetHeight
         // 清除画布
-        context.clearRect(0, 0, targetWidth, targetHeight);
+        context.clearRect(0, 0, targetWidth, targetHeight)
         // 图片压缩
-        context.drawImage(img, 0, 0, targetWidth, targetHeight);
-        let newUrl = canvas.toDataURL('image/jpeg', 0.92);
+        context.drawImage(img, 0, 0, targetWidth, targetHeight)
+        let newUrl = canvas.toDataURL('image/jpeg', 0.92)
         console.log(self.getImgSize(newUrl))
         if (self.getImgSize(newUrl) > 1024) {
           this.$message.error('图片太大，请更改图片')
           inputDOM.value = ''
-          return
+          return false
         } else {
           self.imgSrc = newUrl
         }
       }
       // 文件base64化，以便获知图片原始尺寸
-      reader.onload = function(e) {
-        img.src = e.target.result;
-      };
+      reader.onload = function (e) {
+        img.src = e.target.result
+      }
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file)
     },
-    dataURLtoFile: function(dataurl, filename = 'file') {
+    dataURLtoFile: function (dataurl, filename = 'file') {
       let arr = dataurl.split(',')
-      let mime = arr[0].match(/:(.*?);/)[1]
+      let mime = arr[0].match(/:(.*?) /)[1]
       let suffix = mime.split('/')[1]
       let bstr = atob(arr[1])
       let n = bstr.length
@@ -233,14 +234,14 @@ export default {
       }
       return new File([u8arr], `${filename}.${suffix}`, {type: mime})
     },
-    getImgSize :function(str) {
-      //获取base64图片大小，返回KB数字
-      let strLength = str.length;
-      let fileLength = parseInt(strLength - (strLength / 8) * 2);
+    getImgSize: function (str) {
+      // 获取base64图片大小，返回KB数字
+      let strLength = str.length
+      let fileLength = parseInt(strLength - (strLength / 8) * 2)
       // 由字节转换为KB
-      let size = "";
-      size = (fileLength / 1024).toFixed(2);
-      return parseInt(size);
+      let size = ''
+      size = (fileLength / 1024).toFixed(2)
+      return parseInt(size)
     }
   },
   mounted: function () {

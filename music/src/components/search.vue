@@ -66,7 +66,7 @@
 export default {
   name: 'search',
   props: {
-    host:{
+    host: {
       type: String
     }
   },
@@ -94,17 +94,17 @@ export default {
         }
       } else {
         this.src = src
-        audio.oncanplaythrough = function() {
+        audio.oncanplaythrough = function () {
           audio.play()
         }
       }
     },
     search: function () {
       let self = this
-      this.searchResultDispaly.display = 'block';
+      this.searchResultDispaly.display = 'block'
       this.$http.get(this.host + 'search?name=' + self.searchText)
         .then(function (res) {
-          if (res.data.status === 0){
+          if (res.data.status === 0) {
             self.searchResult = []
             for (let i in res.data.data) {
               res.data.data[i].src = self.path + res.data.data[i].src
@@ -114,11 +114,11 @@ export default {
           }
         })
         .catch(function (err) {
-          console.log('网络错误：'+ err);
+          console.log('网络错误：' + err)
         })
     },
     download: function (url) {
-      window.open(url,"_blank");
+      window.open(url, '_blank')
     }
   },
   mounted: function () {

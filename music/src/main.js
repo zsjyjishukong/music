@@ -12,8 +12,8 @@ import brands from '@fortawesome/fontawesome-free-brands'
 
 import axios from 'axios'
 
-import ElementUI from "element-ui"
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 axios.defaults.withCredentials = true
 

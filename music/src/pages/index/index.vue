@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import Search from "../../components/search";
-import Mine from "../../components/mine";
+import Search from '../../components/search'
+import Mine from '../../components/mine'
 import Reg from '../../components/reg'
 import Login from '../../components/login'
 import commonFoot from '../../components/commonFooter'
@@ -42,7 +42,7 @@ import commonFoot from '../../components/commonFooter'
 export default {
   name: 'index',
   components: {Search, Mine, Reg, Login, commonFoot},
-  data() {
+  data () {
     return {
       isLogin: false,
       headerSelected: 'find',
@@ -57,19 +57,19 @@ export default {
     },
     changeMusicType: function (name) {
       this.headerSelected = name
-      if (sessionStorage.getItem('uname')){
+      if (sessionStorage.getItem('uname')) {
         this.isLogin = true
       }
     }
   },
   mounted: function () {
-    if (sessionStorage.getItem('uname')){
+    if (sessionStorage.getItem('uname')) {
       this.isLogin = true
       this.img = '/static/upload/' + sessionStorage.getItem('img') + '.jpeg'
     }
   },
   beforeUpdate: function () {
-    if (sessionStorage.getItem('uname')){
+    if (sessionStorage.getItem('uname')) {
       this.isLogin = true
       this.img = '/static/upload/' + sessionStorage.getItem('img') + '.jpeg'
     }

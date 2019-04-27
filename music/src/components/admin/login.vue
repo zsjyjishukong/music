@@ -20,33 +20,38 @@
 </template>
 
 <script>
-    export default {
-        name: "login",
-        props: {
-          host: {
-            type: String
-          }
-        },
-        data(){
-          return {
-            username: '',
-            password: ''
-          }
-        },
-      methods: {
-          submitIt: function () {
-            let self = this
-            this.$http.post(this.host + 'adminLogin',{aname: this.username, apass: this.password})
-              .then((res) => {
-                if (res.data.status === 0) {
-                  self.$message.success('登录成功')
-                } else {
-                  self.$message.error(res.data.msg)
-                }
-              })
-          }
-      }
+export default {
+  name: 'login',
+  props: {
+    host: {
+      type: String
     }
+  },
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    submitIt: function () {
+      let self = this
+      this.$http.post(this.host + 'adminLogin', {aname: this.username, apass: this.password})
+        .then((res) => {
+          if (res.data.status === 0) {
+            self.$message.success('登录成功')
+            sessionStorage.setItem('aname', self.username)
+            self.toIndex()
+          } else {
+            self.$message.error(res.data.msg)
+          }
+        })
+    },
+    toIndex: function () {
+      this.$emit('headerSelect')
+    }
+  }
+}
 </script>
 
 <style scoped>

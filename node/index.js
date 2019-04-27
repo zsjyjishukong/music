@@ -196,6 +196,29 @@ app.post('/adminLogin',(req, res) => {
         }
     })
 })
+
+app.get('/selectAlbum',(req,res) => {
+    let selectSql = 'SELECT * FROM music.album'
+    pool.query(selectSql, (err, ress, field) => {
+        if (err) throw err;
+        let data = []
+        for (let i of ress) {
+            let tmp = {};
+            tmp.albumName = i.album_name;
+            tmp.singer = i.singer;
+            tmp.time = i.time;
+            tmp.company = i.company;
+            tmp.description = i.album_description;
+            tmp.img = i.img;
+            data.push(tmp);
+        }
+        res.send({
+            status: 0,
+            data: data
+        })
+    })
+})
+
 function saveAndVerify(req,res){
     let uname = req.body.uname;
     let upwd = req.body.upwd;

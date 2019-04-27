@@ -10,7 +10,7 @@ export default {
   mounted: function () {
     if (sessionStorage.getItem('uname')) {
 
-    } else{
+    } else {
       this.$emit('changeHeader', 'login')
     }
   }

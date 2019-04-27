@@ -9,28 +9,30 @@
   </div>
   <div id="admin-body">
     <div id="admin-body-container">
-      <login :host="host"></login>
+      <admin v-if="headerSelect === 'admin'" :host="host"></admin>
+      <login v-if="headerSelect === 'login'" :host="host"></login>
     </div>
   </div>
-  <commom-foot></commom-foot>
+  <common-foot></common-foot>
 </div>
 </template>
 
 <script>
-  import login from '../../components/admin/login'
-  import commomFoot from '../../components/commonFooter'
-
-  export default {
-    name: 'index',
-    components: {
-      login, commomFoot
-    },
-    data () {
-      return{
-        host: 'http://localhost:3000/'
-      }
+import login from '../../components/admin/login'
+import commonFoot from '../../components/commonFooter'
+import admin from '../../components/admin/index'
+export default {
+  name: 'index',
+  components: {
+    login, commonFoot, admin
+  },
+  data () {
+    return {
+      host: 'http://localhost:3000/',
+      headerSelect: 'admin'
     }
   }
+}
 </script>
 
 <style scoped>

@@ -25,9 +25,9 @@
 </template>
 
 <script>
-    export default {
-        name: "footer"
-    }
+export default {
+  name: 'commonFooter'
+}
 </script>
 
 <style scoped>

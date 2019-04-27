@@ -36,12 +36,12 @@
 export default {
   name: 'login',
   props: {
-    host:{
+    host: {
       type: String
     }
   },
-  data(){
-    return{
+  data () {
+    return {
       stream: '',
       allowLogin: false,
       username: localStorage.getItem('uname'),
@@ -55,63 +55,63 @@ export default {
   },
   methods: {
     drawVideo: function () {
-      let self = this
-      if(navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.getUserMedia){
+      if (navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.getUserMedia) {
         this.allowMedia = true
-        this.getUserMediaToPhoto({video:{width:480,height:320}},this.success,this.error);
-      }else{
+        this.getUserMediaToPhoto({video: {width: 480, height: 320}}, this.success, this.error)
+      } else {
         this.allowMedia = false
-        alert('你的浏览器不支持访问用户媒体设备');
+        alert('你的浏览器不支持访问用户媒体设备')
       }
     },
-    getUserMediaToPhoto: function (constraints,success,error) {
-      if(navigator.mediaDevices.getUserMedia){
-        //最新标准API
+    getUserMediaToPhoto: function (constraints, success, error) {
+      if (navigator.mediaDevices.getUserMedia) {
+        // 最新标准API
         navigator.mediaDevices.getUserMedia(constraints)
           .then(success)
-          .catch(error);
-      }else if (navigator.webkitGetUserMedia) {
-        //webkit核心浏览器
-        navigator.webkitGetUserMedia(constraints,success,error);
-      }else if(navigator.mozGetUserMedia){
-        //firefox浏览器
-        navigator.mozGetUserMedia(constraints,success,error);
-      }else if(navigator.getUserMedia){
-        //旧版API
-        navigator.getUserMedia(constraints,success,error);
+          .catch(error)
+      } else if (navigator.webkitGetUserMedia) {
+        // webkit核心浏览器
+        navigator.webkitGetUserMedia(constraints, success, error)
+      } else if (navigator.mozGetUserMedia) {
+        // firefox浏览器
+        navigator.mozGetUserMedia(constraints, success, error)
+      } else if (navigator.getUserMedia) {
+        // 旧版API
+        navigator.getUserMedia(constraints, success, error)
       }
     },
-    success: function (stream){
-      //兼容webkit核心浏览器
-      let CompatibleURL = window.URL || window.webkitURL;
-      //将视频流转化为video的源
+    success: function (stream) {
+      // 兼容webkit核心浏览器
+      // eslint-disable-next-line
+      let CompatibleURL = window.URL || window.webkitURL
+      // 将视频流转化为video的源
       let video = document.getElementById('video')
       video.srcObject = stream
       this.video = video
       this.stream = stream
-      video.play();//播放视频
-      //将视频绘制到canvas上
-      if (this.allowLogin&&this.allowLogin) {
+      // 播放视频
+      video.play()
+      // 将视频绘制到canvas上
+      if (this.allowLogin && this.allowLogin) {
         if (this.password === '') {
           this.postFace(video)
         } else {
           this.passLogin()
         }
       }
-
     },
-    error:function (error) {
-      console.log('访问用户媒体失败：',error.name,error.message);
+    error: function (error) {
+      console.log('访问用户媒体失败：', error.name, error.message)
     },
     postFace: function (video) {
       let canvas = document.getElementById('canvas')
-      let context = canvas.getContext('2d');
-      let timer = setInterval(this.faceLoginFunc(context,canvas),10000)
+      let context = canvas.getContext('2d')
+      let timer = setInterval(this.faceLoginFunc(context, canvas), 10000)
       this.timer = timer
     },
     passLogin: function () {
       let self = this
-      this.$http.post(self.host + 'passLogin', {uname: self.username,password: self.password})
+      this.$http.post(self.host + 'passLogin', {uname: self.username, password: self.password})
         .then((res) => {
           if (res.data.status === 0) {
             self.$message.success('登录成功')
@@ -127,7 +127,7 @@ export default {
         })
         .catch((err) => {
           self.$message.error('网络错误')
-          console.log('网络错误' + err);
+          console.log('网络错误' + err)
           self.pageLoading = false
         })
     },
@@ -155,14 +155,15 @@ export default {
     },
     faceLoginFunc: function (context, canvas) {
       let self = this
+      let video = document.getElementById('video')
       this.pageLoading = true
-      context.drawImage(video,0,0,480,320);
-      let img=canvas.toDataURL('image/jpg')
+      context.drawImage(video, 0, 0, 480, 320)
+      let img = canvas.toDataURL('image/jpg')
       // {#获取完整的base64编码#}
-      img=img.split(',')[1]
-      //将照片以base64用ajax传到后台
+      img = img.split(',')[1]
+      // 将照片以base64用ajax传到后台
       self.$http.post(self.host + 'faceLogin', {url: img, uname: self.username})
-        .then((res) =>{
+        .then((res) => {
           if (res.data.status === 0) {
             self.$message.success('登录成功')
             localStorage.setItem('uname', self.username)
@@ -172,15 +173,14 @@ export default {
             setTimeout(function () {
               self.toMine()
             }, 500)
-
-          } else if (res.data.status === 1){
+          } else if (res.data.status === 1) {
             self.$message.error(res.data.msg)
           }
           self.pageLoading = false
         })
         .catch((err) => {
           self.$message.error('网络错误')
-          console.log('网络错误：' + err);
+          console.log('网络错误：' + err)
           self.pageLoading = false
         })
     },
