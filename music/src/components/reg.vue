@@ -81,7 +81,7 @@ export default {
   name: 'reg',
   props: {
     host:{
-      type: Array
+      type: String
     }
   },
   data () {

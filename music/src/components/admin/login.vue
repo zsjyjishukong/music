@@ -24,7 +24,7 @@
         name: "login",
         props: {
           host: {
-            type: Array
+            type: String
           }
         },
         data(){
@@ -35,9 +35,14 @@
         },
       methods: {
           submitIt: function () {
+            let self = this
             this.$http.post(this.host + 'adminLogin',{aname: this.username, apass: this.password})
               .then((res) => {
-                console.log(res);
+                if (res.data.status === 0) {
+                  self.$message.success('登录成功')
+                } else {
+                  self.$message.error(res.data.msg)
+                }
               })
           }
       }

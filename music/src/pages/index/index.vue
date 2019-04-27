@@ -28,7 +28,7 @@
   <mine v-if="headerSelected === 'mine'" @changeHeader="changeMusicType"></mine>
   <reg v-if="headerSelected === 'reg'" v-on:changeHeader="changeMusicType" :host="host"></reg>
   <login v-if="headerSelected === 'login'" @changeHeader="changeMusicType" :host="host"></login>
-  <foot></foot>
+  <common-foot></common-foot>
 </div>
 </template>
 
@@ -37,11 +37,11 @@ import Search from "../../components/search";
 import Mine from "../../components/mine";
 import Reg from '../../components/reg'
 import Login from '../../components/login'
-import Foot from '../../components/footer'
+import commonFoot from '../../components/commonFooter'
 
 export default {
   name: 'index',
-  components: {Search, Mine, Reg, Login, Foot},
+  components: {Search, Mine, Reg, Login, commonFoot},
   data() {
     return {
       isLogin: false,

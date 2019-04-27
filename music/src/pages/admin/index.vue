@@ -12,17 +12,18 @@
       <login :host="host"></login>
     </div>
   </div>
-  <foot></foot>
+  <commom-foot></commom-foot>
 </div>
 </template>
 
 <script>
   import login from '../../components/admin/login'
-  import foot from '../../components/footer'
+  import commomFoot from '../../components/commonFooter'
+
   export default {
     name: 'index',
     components: {
-      login, foot
+      login, commomFoot
     },
     data () {
       return{

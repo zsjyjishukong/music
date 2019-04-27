@@ -67,7 +67,7 @@ export default {
   name: 'search',
   props: {
     host:{
-      type: Array
+      type: String
     }
   },
   data () {

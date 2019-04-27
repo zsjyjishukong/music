@@ -37,7 +37,7 @@ export default {
   name: 'login',
   props: {
     host:{
-      type: Array
+      type: String
     }
   },
   data(){
