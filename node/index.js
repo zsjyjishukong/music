@@ -25,9 +25,7 @@ let pool = mysql.createPool({
     user: mysql_user,
     password: mysql_pass
 });
-let text = ['a','b','c','d','e']
 app.use(session({
-    // secret: text[parseInt(Math.random()*5)], //secret的值建议使用随机字符串
     secret: 'aaa', //secret的值建议使用随机字符串
     cookie: {maxAge: 60 * 1000 * 30}, // 过期时间（毫秒）
     resave: true, // 即使 session 没有被修改，也保存 session 值，默认为 true
@@ -167,7 +165,7 @@ app.post('/passLogin',(req,res) => {
         if (err) throw err;
         if (ress.length === 1) {
             req.session.sign = true;
-            req.session.uname = uname
+            req.session.uname = uname;
             res.send({
                 status: 0,
                 msg: '登录成功',
@@ -205,12 +203,12 @@ app.post('/adminLogin',(req, res) => {
 })
 
 app.get('/selectAlbum',(req,res) => {
-    console.log(req.session);
     if (req.session.sign !== true) {
         res.send({
             status: 2,
             msg: '未登录，没有权限'
         })
+        return false;
     }
     let selectSql = 'SELECT * FROM music.album'
     pool.query(selectSql, (err, ress, field) => {
@@ -233,6 +231,54 @@ app.get('/selectAlbum',(req,res) => {
     })
 })
 
+app.post('/addAlbum', multer({
+    //设置文件存储路径
+    dest: '../music/static/album'
+}).single('file'), (req, res, next) => {
+    let file = req.file;
+    let fileInfo = {};
+    let timeStamp = new Date().getTime();
+    let newName =  '../music/static/album/' + timeStamp +  '.' +  file.originalname.split('.')[1];
+    fs.renameSync('../music/static/album/' + file.filename, newName);
+    // 获取文件信息
+    fileInfo.mimetype = file.mimetype;
+    fileInfo.originalname = file.originalname;
+    fileInfo.size = file.size;
+    fileInfo.path = file.path;
+    let albumName = req.body.albumName;
+    let company = req.body.company;
+    let description = req.body.description;
+    let singer = req.body.singer;
+    let time = req.body.time;
+    let selectAlbumSql = 'SELECT id FROM music.album WHERE album_name=? AND singer=?';
+    pool.query(selectAlbumSql, [albumName, singer], (err, ress, field) => {
+        if (ress.length > 0) {
+            res.send({
+                status: 1,
+                msg: '该专辑已经存在，请勿重复添加'
+            })
+        } else {
+            addAlbum()
+        }
+    })
+    function addAlbum() {
+        let insertAlbumSql = 'INSERT INTO music.album(album_name,singer,time,company,album_description,img,id) VALUES (?,?,?,?,?,?,NULL)';
+        pool.query(insertAlbumSql, [albumName, singer, time, company, description, timeStamp], (err, ress, field) => {
+            if (err) throw err;
+            if (ress.affectedRows === 1) {
+                res.send({
+                    status: 0,
+                    msg: '添加成功'
+                })
+            } else {
+                res.send({
+                    status: 1,
+                    msg: '添加失败'
+                })
+            }
+        })
+    }
+})
 function saveAndVerify(req,res){
     let uname = req.body.uname;
     let upwd = req.body.upwd;
