@@ -4,13 +4,14 @@
     <div id="admin-header-container">
       <img src="@/assets/logo.png" height="50px;" id="logo">
       <span class="white title" style="margin-left: 50px;">后台管理系统</span>
-      <span class="white little-title button" style="float: right;">登录</span>
+      <span class="white little-title button" style="float: right;" v-if="!aname">登录</span>
+      <span class="white little-title button" style="float: right" @click="logout">{{aname}}</span>
     </div>
   </div>
   <div id="admin-body">
     <div id="admin-body-container">
       <admin v-if="headerSelect === 'admin'" :host="host"></admin>
-      <login v-if="headerSelect === 'login'" :host="host"></login>
+      <login v-if="headerSelect === 'login'" :host="host" ></login>
     </div>
   </div>
   <common-foot></common-foot>
@@ -29,7 +30,19 @@ export default {
   data () {
     return {
       host: 'http://localhost:3000/',
-      headerSelect: 'admin'
+      headerSelect: 'admin',
+      aname: sessionStorage.getItem('aname')
+    }
+  },
+  methods: {
+    logout: function () {
+      sessionStorage.clear()
+      location.reload()
+    }
+  },
+  mounted: function () {
+    if (!sessionStorage.getItem('aname')) {
+      this.headerSelect = 'login'
     }
   }
 }

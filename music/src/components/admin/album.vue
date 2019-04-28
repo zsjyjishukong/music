@@ -55,10 +55,13 @@ export default {
         .then((res) => {
           if (res.data.status === 0) {
             self.albumData = []
-            self.albumData.push(res.data.album)
+            self.albumData = res.data.data
           }
         })
     }
+  },
+  mounted: function () {
+    this.selectAlbum()
   }
 }
 </script>

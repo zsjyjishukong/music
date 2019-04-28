@@ -41,14 +41,11 @@ export default {
           if (res.data.status === 0) {
             self.$message.success('登录成功')
             sessionStorage.setItem('aname', self.username)
-            self.toIndex()
+            location.reload()
           } else {
             self.$message.error(res.data.msg)
           }
         })
-    },
-    toIndex: function () {
-      this.$emit('headerSelect')
     }
   }
 }

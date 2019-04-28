@@ -3,8 +3,8 @@ const mysql = require('mysql');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const cookieParser = require('cookie-parser');
 const conn = require('./conn')
+const session = require('express-session')
 
 const tencentyoutuyun = require('tencentyoutuyun');
 const conf  = tencentyoutuyun.conf;
@@ -21,11 +21,18 @@ let mysql_pass = conn.pass;
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: '5mb'}));
-app.use(cookieParser('aaa'));
 let pool = mysql.createPool({
     user: mysql_user,
     password: mysql_pass
 });
+let text = ['a','b','c','d','e']
+app.use(session({
+    // secret: text[parseInt(Math.random()*5)], //secret的值建议使用随机字符串
+    secret: 'aaa', //secret的值建议使用随机字符串
+    cookie: {maxAge: 60 * 1000 * 30}, // 过期时间（毫秒）
+    resave: true, // 即使 session 没有被修改，也保存 session 值，默认为 true
+    saveUninitialized: false
+}));
 
 //设置允许跨域访问该服务.
 app.all('*', function (req, res, next) {
@@ -90,7 +97,6 @@ app.get('/search', function (req, res) {
             }
         }
     }
-
 })
 app.get('/verifyUname',function (req, res) {
     let queryString = req.query.uname
@@ -143,7 +149,7 @@ app.post('/faceLogin', (req, res) => {
            standardImg = ress[0].reg_time;
            let imgA = '../music/static/upload/' + standardImg + '.jpeg';
            let imgB = 'tmp/verify.jpg';
-           loginCompareFace(imgA, imgB, res, uname);
+           loginCompareFace(imgA, imgB, res, uname, req);
         } else {
             res.send({
                 status: 1,
@@ -160,8 +166,8 @@ app.post('/passLogin',(req,res) => {
     pool.query(verifySql,[uname, pass], (err, ress, filed)=>{
         if (err) throw err;
         if (ress.length === 1) {
-            res.cookie('user',uname,{maxAge:600000,signed:true});  //signed 表示对cookie加密
-            res.cookie('img',ress[0].reg_time,{maxAge:600000,signed:false});  //signed 表示对cookie加密
+            req.session.sign = true;
+            req.session.uname = uname
             res.send({
                 status: 0,
                 msg: '登录成功',
@@ -182,8 +188,9 @@ app.post('/adminLogin',(req, res) => {
     let apass = req.body.apass;
     pool.query(selectSql, [aname, apass], (err, ress, field) => {
         if (err) throw err;
-        console.log(ress);
         if (ress.length === 1) {
+            req.session.sign = true;
+            req.session.aname = aname;
             res.send({
                 status: 0,
                 msg: '登录成功'
@@ -198,6 +205,13 @@ app.post('/adminLogin',(req, res) => {
 })
 
 app.get('/selectAlbum',(req,res) => {
+    console.log(req.session);
+    if (req.session.sign !== true) {
+        res.send({
+            status: 2,
+            msg: '未登录，没有权限'
+        })
+    }
     let selectSql = 'SELECT * FROM music.album'
     pool.query(selectSql, (err, ress, field) => {
         if (err) throw err;
@@ -270,7 +284,7 @@ function insertIntoUser(uname, upwd, beauty,timeStamp, res){
     })
 }
 
-function loginCompareFace(imgA, imgB, res, uname) {
+function loginCompareFace(imgA, imgB, res, uname, req) {
     youtu.facecompare(imgA, imgB, (data) => {
         if (data.httpcode === 200) {
             if(data.data.errorcode === -1101){
@@ -285,8 +299,8 @@ function loginCompareFace(imgA, imgB, res, uname) {
                 })
             }else if (data.data.similarity > 90) {
                let time = (imgA.split('/')[4]).split('.')[0];
-               res.cookie('user',uname,{maxAge:600000,signed:true,httpOnly: true});  //signed 表示对cookie加密
-               res.cookie('img',time,{maxAge:600000,signed:false,httpOnly: false});  //signed 表示对cookie加密
+               req.session.usign = true
+               req.session.uname = uname
                res.send({
                    status: 0,
                    msg: '验证通过',
