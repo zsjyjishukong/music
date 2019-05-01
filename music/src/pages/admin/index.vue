@@ -20,7 +20,7 @@
 
 <script>
 import login from '../../components/admin/login'
-import commonFoot from '../../components/commonFooter'
+import commonFoot from '../../components/common/commonFooter'
 import admin from '../../components/admin/index'
 export default {
   name: 'index',

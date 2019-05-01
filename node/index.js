@@ -10,10 +10,15 @@ const tencentyoutuyun = require('tencentyoutuyun');
 const conf  = tencentyoutuyun.conf;
 const youtu = tencentyoutuyun.youtu;
 
-let appid = '10175295';
-let secretId = 'AKIDEQRIwLxFTUF5vZIlMTM53qOiuuhIM8LL';
-let secretKey = 'yWknsOn7qQuFiqAIjCZoqhTDpPtBE5sV';
-let userid = '1361882279';
+const albumPath = '../music/static/album/';
+const uploadPath = '../music/static/upload/';
+const youtuConfig = require('./youtuConfig');
+
+let appid = youtuConfig.appid;
+let secretId = youtuConfig.secretId;
+let secretKey = youtuConfig.secretKey;
+let userid = youtuConfig.userid;
+
 conf.setAppInfo(appid, secretId, secretKey, userid, 0)
 
 let mysql_user = conn.user;
@@ -71,9 +76,6 @@ app.get('/search', function (req, res) {
     });
     function returnResult(a){
         if (a===3){
-            console.log('singer'+searchSinger);
-            console.log('album'+searchAlbum);
-            console.log('song'+searchSong);
             if (searchAlbum.length > 0) {
                 res.send({
                     status: 0,
@@ -145,7 +147,7 @@ app.post('/faceLogin', (req, res) => {
         if (err) throw err;
         if (ress.length > 0) {
            standardImg = ress[0].reg_time;
-           let imgA = '../music/static/upload/' + standardImg + '.jpeg';
+           let imgA = uploadPath + standardImg + '.jpeg';
            let imgB = 'tmp/verify.jpg';
            loginCompareFace(imgA, imgB, res, uname, req);
         } else {
@@ -222,6 +224,7 @@ app.get('/selectAlbum',(req,res) => {
             tmp.company = i.company;
             tmp.description = i.album_description;
             tmp.img = i.img;
+            tmp.ID = i.id
             data.push(tmp);
         }
         res.send({
@@ -234,12 +237,20 @@ app.get('/selectAlbum',(req,res) => {
 app.post('/addAlbum', multer({
     //设置文件存储路径
     dest: '../music/static/album'
-}).single('file'), (req, res, next) => {
+}).single('file'),
+    (req, res, next) => {
+    if (req.session.sign !== true) {
+        res.send({
+            status: 2,
+            msg: '未登录，没有权限'
+        })
+        return false;
+    }
     let file = req.file;
     let fileInfo = {};
     let timeStamp = new Date().getTime();
-    let newName =  '../music/static/album/' + timeStamp +  '.' +  file.originalname.split('.')[1];
-    fs.renameSync('../music/static/album/' + file.filename, newName);
+    let newName =  albumPath + timeStamp +  '.' +  file.originalname.split('.')[1];
+    fs.renameSync(albumPath + file.filename, newName);
     // 获取文件信息
     fileInfo.mimetype = file.mimetype;
     fileInfo.originalname = file.originalname;
@@ -279,6 +290,84 @@ app.post('/addAlbum', multer({
         })
     }
 })
+
+app.post('/editAlbum', multer({
+    //设置文件存储路径
+    dest: '../music/static/album'
+}).single('file'),
+(req, res, next) => {
+    if (req.session.sign !== true) {
+        res.send({
+            status: 2,
+            msg: '未登录，没有权限'
+        })
+        return false;
+    }
+    let fileChange = req.body.fileChange;
+    let timeStamp = new Date().getTime();
+    if (fileChange === 'true') {
+        let file = req.file;
+        let fileInfo = {};
+        let newName =  albumPath + timeStamp +  '.' +  file.originalname.split('.')[1];
+        fs.renameSync(albumPath + file.filename, newName);
+        // 获取文件信息
+        fileInfo.mimetype = file.mimetype;
+        fileInfo.originalname = file.originalname;
+        fileInfo.size = file.size;
+        fileInfo.path = file.path;
+    }
+    let albumName = req.body.albumName;
+    let company = req.body.company;
+    let description = req.body.description;
+    let singer = req.body.singer;
+    let time = req.body.time;
+    let img = req.body.img;
+    let oldImg = req.body.oldImg;
+    if (fileChange) {
+        fs.unlinkSync('../music' + oldImg);
+        img = timeStamp;
+    } else {
+        img = img.split('/');
+        img = img[img.length - 1];
+        img = img.split('.');
+        img = img[0];
+    }
+    let id = req.body.ID;
+    let updateAlbumSql = 'UPDATE music.album SET album_name=?,singer=?,time=?,company=?,album_description=?,img=? WHERE id=?';
+    pool.query(updateAlbumSql, [albumName, singer, time, company, description, img, id], (err, ress, field) => {
+        if (err) throw err;
+        if (ress.affectedRows === 1) {
+            res.send({
+                status: 0,
+                msg: '修改成功'
+            })
+        }
+    })
+})
+
+app.post('/deleteAlbum', (req, res) => {
+    if (req.session.sign !== true) {
+        res.send({
+            status: 2,
+            msg: '未登录，没有权限'
+        })
+        return false;
+    }
+    let id = req.body.id;
+    let imgPath = '../music' + req.body.img;
+    fs.unlinkSync(imgPath);
+    let deleteSql = 'DELETE FROM music.album WHERE id=?';
+    pool.query(deleteSql, [id], (err, ress, field) => {
+        if (err) throw err;
+        if (ress.affectedRows === 1) {
+            res.send({
+                status: 0,
+                msg: '修改成功'
+            })
+        }
+    })
+})
+
 function saveAndVerify(req,res){
     let uname = req.body.uname;
     let upwd = req.body.upwd;
@@ -286,8 +375,8 @@ function saveAndVerify(req,res){
     let fileInfo = {};
     let beauty = 0;
     let timeStamp = new Date().getTime();
-    let newName =  '../music/static/upload/' + timeStamp +  '.' +  file.originalname.split('.')[1]
-    fs.renameSync('../music/static/upload/' + file.filename, newName);//这里修改文件名字，比较随意。
+    let newName =  uploadPath + timeStamp +  '.' +  file.originalname.split('.')[1]
+    fs.renameSync(uploadPath + file.filename, newName);//这里修改文件名字，比较随意。
     // 获取文件信息
     fileInfo.mimetype = file.mimetype;
     fileInfo.originalname = file.originalname;

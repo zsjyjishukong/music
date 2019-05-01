@@ -4,7 +4,7 @@
         <div class="login-title">
           管理员登录
         </div>
-        <div class="login-body">
+        <div class="login-body" @keydown.13="submitIt">
           <el-input  v-model="username">
             <i slot="prefix" class="fas fa-user el-input__icon"></i>
           </el-input>

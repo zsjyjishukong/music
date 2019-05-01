@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import Search from '../../components/search'
-import Mine from '../../components/mine'
-import Reg from '../../components/reg'
-import Login from '../../components/login'
-import commonFoot from '../../components/commonFooter'
+import Search from '../../components/user/search'
+import Mine from '../../components/user/mine'
+import Reg from '../../components/user/reg'
+import Login from '../../components/user/login'
+import commonFoot from '../../components/common/commonFooter'
 
 export default {
   name: 'index',
